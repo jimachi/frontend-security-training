@@ -15,6 +15,7 @@ app.use(
     },
   })
 );
+app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
 app.use('/csrf', csrf);
 
@@ -32,6 +33,11 @@ app.get('/csp', (req, res) => {
       "require-trusted-types-for 'script';"
   );
   res.render('csp', { nonce: nonceValue });
+});
+
+app.post('/signup', (req, res) => {
+  console.log(req.body);
+  res.send('アカウント登録をしました。');
 });
 
 app.listen(PORT, () => {
